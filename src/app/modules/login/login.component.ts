@@ -20,9 +20,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    const authenticated: boolean = this.authenticationService.isAuthenticated();
-    console.log(authenticated);
-    if (authenticated) {
+    if (this.authenticationService.isAuthenticated()) {
       this.router.navigate(['/home']);
     }
   }

@@ -1,25 +1,55 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { RegistrationComponent } from './registration.component';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthenticationService } from 'src/app/auth/authentication.service';
+import { routes } from './registration-routing.module';
 
 describe('RegistrationComponent', () => {
-  let component: RegistrationComponent;
-  let fixture: ComponentFixture<RegistrationComponent>;
+    let component: RegistrationComponent;
+    let fixture: ComponentFixture<RegistrationComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ RegistrationComponent ]
-    })
-    .compileComponents();
-  }));
+    class MockRouter {
+        navigate() { }
+    }
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(RegistrationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [RegistrationComponent],
+            imports: [RouterTestingModule.withRoutes(routes)],
+            providers: [
+                AuthenticationService, { provide: Router, useClass: MockRouter }
+            ]
+        })
+            .compileComponents();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(RegistrationComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should navigate to /home if authenticated',
+        inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
+            spyOn(authenticationService, 'isAuthenticated').and.returnValue(true);
+            spyOn(router, 'navigate').and.callThrough();
+            component.ngOnInit();
+            expect(router.navigate).toHaveBeenCalledWith(['/home']);
+        })
+    );
+
+    it('should not navigate to /home if not authenticated',
+        inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
+            spyOn(authenticationService, 'isAuthenticated').and.returnValue(false);
+            spyOn(router, 'navigate').and.callThrough();
+            component.ngOnInit();
+            expect(router.navigate).not.toHaveBeenCalledWith(['/home']);
+        })
+    );
 });

@@ -10,7 +10,7 @@ import { AuthenticationService } from '../auth/authentication.service';
 export class MainComponent implements OnInit {
 
   constructor(
-    private authenticationService: AuthenticationService, 
+    private authenticationService: AuthenticationService,
     private router: Router) { }
 
   ngOnInit(): void {

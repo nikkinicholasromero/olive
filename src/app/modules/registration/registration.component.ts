@@ -14,9 +14,7 @@ export class RegistrationComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    const authenticated: boolean = this.authenticationService.isAuthenticated();
-    console.log(authenticated);
-    if (authenticated) {
+    if (this.authenticationService.isAuthenticated()) {
       this.router.navigate(['/home']);
     }
   }

@@ -27,7 +27,7 @@ describe('MainComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should navigate to /home if already authenticated',
+    it('should navigate to "home" if already authenticated',
         inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
             spyOn(router, 'navigate').and.callThrough();
             spyOn(authenticationService, 'isAuthenticated').and.returnValue(true);
@@ -36,7 +36,7 @@ describe('MainComponent', () => {
         })
     );
 
-    it('should navigate to /login if not authenticated',
+    it('should navigate to "login" if not authenticated',
         inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
             spyOn(router, 'navigate').and.callThrough();
             spyOn(authenticationService, 'isAuthenticated').and.returnValue(false);

@@ -29,7 +29,7 @@ describe('ResetPasswordComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should navigate to /home if authenticated',
+  it('should navigate to "home" if authenticated',
       inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
           spyOn(authenticationService, 'isAuthenticated').and.returnValue(true);
           spyOn(router, 'navigate').and.callThrough();
@@ -38,7 +38,7 @@ describe('ResetPasswordComponent', () => {
       })
   );
 
-  it('should not navigate to /home if not authenticated',
+  it('should not navigate to "home" if not authenticated',
       inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
           spyOn(authenticationService, 'isAuthenticated').and.returnValue(false);
           spyOn(router, 'navigate').and.callThrough();

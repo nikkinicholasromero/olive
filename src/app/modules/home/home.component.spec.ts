@@ -27,7 +27,7 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should navigate to /login when logout() is called',
+  it('should navigate to "login" when logout() is called',
     inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
       spyOn(authenticationService, 'logout').and.callThrough();
       spyOn(router, 'navigate').and.callThrough();

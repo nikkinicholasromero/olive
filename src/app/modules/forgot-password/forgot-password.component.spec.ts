@@ -47,4 +47,12 @@ describe('ForgotPasswordComponent', () => {
           expect(router.navigate).not.toHaveBeenCalledWith(['home']);
       })
   );
+
+  it('should navigate to root when submit is clicked',
+      inject([Router], (router: Router) => {
+          spyOn(router, 'navigate').and.callThrough();
+          component.onSubmit();
+          expect(router.navigate).toHaveBeenCalledWith(['']);
+      })
+  );
 });

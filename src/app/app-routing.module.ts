@@ -20,6 +20,9 @@ export const routes: Routes = [{
     path: 'forgotPassword',
     loadChildren: () => import('./modules/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
 }, {
+    path: 'resetPassword',
+    loadChildren: () => import('./modules/reset-password/reset-password.module').then(m => m.ResetPasswordModule)
+}, {
     path: 'home',
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)

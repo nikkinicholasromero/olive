@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../auth/authentication.service';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../auth/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authenticationService.isAuthenticated()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['home']);
     }
   }
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     const emailAddress: string = this.loginForm.controls['emailAddress'].value;
     const password: string = this.loginForm.controls['password'].value;
     if (this.authenticationService.authenticate(emailAddress, password)) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['home']);
     }
   }
 }

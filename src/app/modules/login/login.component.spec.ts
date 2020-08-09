@@ -1,29 +1,21 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-
-import { LoginComponent } from './login.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { routes } from '../login/login-routing.module';
-import { AuthenticationService } from 'src/app/auth/authentication.service';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthenticationService } from 'src/app/auth/authentication.service';
+import { routes } from '../../app-routing.module';
+import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-  class MockRouter {
-      navigate() { }
-  }
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       imports: [RouterTestingModule.withRoutes(routes), ReactiveFormsModule],
-      providers: [
-          AuthenticationService, { provide: Router, useClass: MockRouter }, FormBuilder
-      ]
-    })
-    .compileComponents();
+      providers: [AuthenticationService, FormBuilder]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -41,7 +33,7 @@ describe('LoginComponent', () => {
           spyOn(authenticationService, 'isAuthenticated').and.returnValue(true);
           spyOn(router, 'navigate').and.callThrough();
           component.ngOnInit();
-          expect(router.navigate).toHaveBeenCalledWith(['/home']);
+          expect(router.navigate).toHaveBeenCalledWith(['home']);
       })
   );
 
@@ -50,7 +42,7 @@ describe('LoginComponent', () => {
           spyOn(authenticationService, 'isAuthenticated').and.returnValue(false);
           spyOn(router, 'navigate').and.callThrough();
           component.ngOnInit();
-          expect(router.navigate).not.toHaveBeenCalledWith(['/home']);
+          expect(router.navigate).not.toHaveBeenCalledWith(['home']);
       })
   );
 });

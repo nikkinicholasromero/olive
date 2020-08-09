@@ -1,26 +1,19 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-
-import { HomeComponent } from './home.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { routes } from 'src/app/app-routing.module';
-import { AuthenticationService } from 'src/app/auth/authentication.service';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthenticationService } from 'src/app/auth/authentication.service';
+import { routes } from '../../app-routing.module';
+import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
-  class MockRouter {
-    navigate() { }
-  }
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent],
       imports: [RouterTestingModule.withRoutes(routes)],
-      providers: [
-        AuthenticationService, { provide: Router, useClass: MockRouter }
-      ]
+      providers: [AuthenticationService]
     }).compileComponents();
   }));
 
@@ -40,7 +33,7 @@ describe('HomeComponent', () => {
       spyOn(router, 'navigate').and.callThrough();
       component.logout();
       expect(authenticationService.logout).toHaveBeenCalled();
-      expect(router.navigate).toHaveBeenCalledWith(['/login']);
+      expect(router.navigate).toHaveBeenCalledWith(['login']);
     })
   );
 });

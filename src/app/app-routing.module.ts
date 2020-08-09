@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { MainComponent } from './main/main.component';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
+import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const routes: Routes = [{
@@ -13,6 +13,9 @@ export const routes: Routes = [{
 }, {
     path: 'register',
     loadChildren: () => import('./modules/registration/registration.module').then(m => m.RegistrationModule)
+}, {
+    path: 'accountActivation',
+    loadChildren: () => import('./modules/account-activation/account-activation.module').then(m => m.AccountActivationModule)
 }, {
     path: 'home',
     canActivate: [AuthGuard],

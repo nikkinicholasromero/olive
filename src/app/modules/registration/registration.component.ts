@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../auth/authentication.service';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../auth/authentication.service';
 
 @Component({
   selector: 'app-registration',
@@ -24,11 +24,11 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authenticationService.isAuthenticated()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['home']);
     }
   }
 
   onSubmit(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 }

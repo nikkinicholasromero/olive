@@ -1,25 +1,24 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticationService } from 'src/app/auth/authentication.service';
 import { routes } from '../../app-routing.module';
-import { RegistrationComponent } from './registration.component';
+import { AccountActivationComponent } from './account-activation.component';
 
-describe('RegistrationComponent', () => {
-    let component: RegistrationComponent;
-    let fixture: ComponentFixture<RegistrationComponent>;
+describe('AccountActivationComponent', () => {
+    let component: AccountActivationComponent;
+    let fixture: ComponentFixture<AccountActivationComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [RegistrationComponent],
-            imports: [RouterTestingModule.withRoutes(routes), ReactiveFormsModule],
-            providers: [AuthenticationService, FormBuilder]
+            declarations: [AccountActivationComponent],
+            imports: [RouterTestingModule.withRoutes(routes)],
+            providers: [AuthenticationService]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(RegistrationComponent);
+        fixture = TestBed.createComponent(AccountActivationComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

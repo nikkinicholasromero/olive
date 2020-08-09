@@ -17,6 +17,9 @@ export const routes: Routes = [{
     path: 'accountActivation',
     loadChildren: () => import('./modules/account-activation/account-activation.module').then(m => m.AccountActivationModule)
 }, {
+    path: 'forgotPassword',
+    loadChildren: () => import('./modules/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
+}, {
     path: 'home',
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)

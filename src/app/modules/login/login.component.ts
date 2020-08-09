@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.formBuilder.group({
-    username: [''],
+    emailAddress: [''],
     password: ['']
   });
 
@@ -26,9 +26,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const username: string = this.loginForm.controls['username'].value;
+    const emailAddress: string = this.loginForm.controls['emailAddress'].value;
     const password: string = this.loginForm.controls['password'].value;
-    if (this.authenticationService.authenticate(username, password)) {
+    if (this.authenticationService.authenticate(emailAddress, password)) {
       this.router.navigate(['/home']);
     }
   }

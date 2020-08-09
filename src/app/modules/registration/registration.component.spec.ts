@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticationService } from 'src/app/auth/authentication.service';
 import { routes } from './registration-routing.module';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
 describe('RegistrationComponent', () => {
     let component: RegistrationComponent;
@@ -17,9 +18,9 @@ describe('RegistrationComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [RegistrationComponent],
-            imports: [RouterTestingModule.withRoutes(routes)],
+            imports: [RouterTestingModule.withRoutes(routes), ReactiveFormsModule],
             providers: [
-                AuthenticationService, { provide: Router, useClass: MockRouter }
+                AuthenticationService, { provide: Router, useClass: MockRouter }, FormBuilder
             ]
         })
             .compileComponents();

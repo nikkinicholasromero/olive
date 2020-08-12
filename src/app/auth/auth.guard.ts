@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 
@@ -8,6 +7,8 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  private unauthenticatedUrls: string[] = ["/login", "/register", "/accountActivation", "/forgotPassword", "/resetPassword"];
+
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router) { }
@@ -15,10 +16,19 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const authenticated = this.authenticationService.isAuthenticated();
-    if (!authenticated) {
+    const isUnauthenticatedUrl = !!this.unauthenticatedUrls.find(e => state.url.indexOf(e) >= 0);
+    const isUserAuthenticated = this.authenticationService.isAuthenticated();
+
+    if ((isUnauthenticatedUrl && !isUserAuthenticated) || (!isUnauthenticatedUrl && isUserAuthenticated)) {
+      return true;
+    } 
+    
+    if (isUnauthenticatedUrl && isUserAuthenticated) {
+      this.router.navigate(['/home']);
+    } else {
       this.router.navigate(['/login']);
     }
-    return authenticated;
+
+    return false;
   }
 }

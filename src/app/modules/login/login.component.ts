@@ -20,9 +20,6 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    if (this.authenticationService.isAuthenticated()) {
-      this.router.navigate(['home']);
-    }
   }
 
   onSubmit(): void {

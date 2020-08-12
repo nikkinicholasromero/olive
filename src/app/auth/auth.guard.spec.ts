@@ -1,5 +1,5 @@
 import { inject, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { Router, RouterStateSnapshot } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { routes } from '../app-routing.module';
 import { AuthGuard } from './auth.guard';
@@ -26,21 +26,47 @@ describe('AuthGuard', () => {
         expect(guard).toBeTruthy();
     });
 
-    it('should return false and navigate to login if not authenticated',
+    it('should return false and navigate to login if not authenticated and url is "/home"',
         inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
+            const state: RouterStateSnapshot = { root: null, url: '/home'};
             spyOn(router, 'navigate').and.callThrough();
             spyOn(authenticationService, 'isAuthenticated').and.returnValue(false);
-            expect(guard.canActivate(null, null)).toBeFalse();
+            expect(guard.canActivate(null, state)).toBeFalse();
             expect(router.navigate).toHaveBeenCalledWith(['/login']);
+            expect(router.navigate).not.toHaveBeenCalledWith(['/home']);
         })
     );
 
-    it('should return true and not navigate to login if authenticated',
+    it('should return true if authenticated and url is "/home"',
         inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
+            const state: RouterStateSnapshot = { root: null, url: '/home'};
             spyOn(router, 'navigate').and.callThrough();
             spyOn(authenticationService, 'isAuthenticated').and.returnValue(true);
-            expect(guard.canActivate(null, null)).toBeTrue();
+            expect(guard.canActivate(null, state)).toBeTrue();
             expect(router.navigate).not.toHaveBeenCalledWith(['/login']);
+            expect(router.navigate).not.toHaveBeenCalledWith(['/home']);
+        })
+    );
+
+    it('should return true if not authenticated and url is "/login"',
+        inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
+            const state: RouterStateSnapshot = { root: null, url: '/login'};
+            spyOn(router, 'navigate').and.callThrough();
+            spyOn(authenticationService, 'isAuthenticated').and.returnValue(false);
+            expect(guard.canActivate(null, state)).toBeTrue();
+            expect(router.navigate).not.toHaveBeenCalledWith(['/login']);
+            expect(router.navigate).not.toHaveBeenCalledWith(['/home']);
+        })
+    );
+
+    it('should return false and navigate to home if authenticated and url is "/login"',
+        inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
+            const state: RouterStateSnapshot = { root: null, url: '/login'};
+            spyOn(router, 'navigate').and.callThrough();
+            spyOn(authenticationService, 'isAuthenticated').and.returnValue(true);
+            expect(guard.canActivate(null, state)).toBeFalse();
+            expect(router.navigate).not.toHaveBeenCalledWith(['/login']);
+            expect(router.navigate).toHaveBeenCalledWith(['/home']);
         })
     );
 });

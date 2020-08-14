@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password.component';
 import { routes } from '../../app-routing.module';
+import { FormFieldComponent } from 'src/app/components/form-field/form-field.component';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordComponent;
@@ -11,7 +12,7 @@ describe('ForgotPasswordComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ForgotPasswordComponent ],
+      declarations: [ForgotPasswordComponent, FormFieldComponent],
       imports: [RouterTestingModule.withRoutes(routes), ReactiveFormsModule],
       providers: [FormBuilder]
     })

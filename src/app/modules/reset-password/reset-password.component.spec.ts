@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { routes } from '../../app-routing.module';
 import { ResetPasswordComponent } from './reset-password.component';
+import { FormFieldComponent } from 'src/app/components/form-field/form-field.component';
 
 describe('ResetPasswordComponent', () => {
   let component: ResetPasswordComponent;
@@ -11,7 +12,7 @@ describe('ResetPasswordComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ResetPasswordComponent],
+      declarations: [ResetPasswordComponent,FormFieldComponent],
       imports: [RouterTestingModule.withRoutes(routes), ReactiveFormsModule],
       providers: [FormBuilder]
     })

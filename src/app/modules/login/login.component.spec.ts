@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { routes } from '../../app-routing.module';
 import { LoginComponent } from './login.component';
+import { FormFieldComponent } from 'src/app/components/form-field/form-field.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -11,7 +12,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
+      declarations: [LoginComponent,FormFieldComponent],
       imports: [RouterTestingModule.withRoutes(routes), ReactiveFormsModule],
       providers: [AuthenticationService, FormBuilder]
     }).compileComponents();

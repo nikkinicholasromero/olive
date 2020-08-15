@@ -1,6 +1,8 @@
 <ng-container [formGroup]="parent">
     <div class="form-group">
         <label>{{ fieldName }}</label>
-    <input [type]="type" [placeholder]="fieldName" class="form-control" [formControlName]="fieldId">
+        <input [type]="type" [formControlName]="fieldId" [placeholder]="fieldName" class="form-control"
+            [class.error]="hasError()">
+        <label *ngIf="hasError()" class="error" for="email">{{ getErrorMessage() }}</label>
     </div>
 </ng-container>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CustomValidators } from '../../validators/custom-validators';
 
 @Component({
   selector: 'app-reset-password',
@@ -9,8 +10,10 @@ import { Router } from '@angular/router';
 })
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup = this.formBuilder.group({
-    password: [''],
+    password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['']
+  },{ 
+    validators: CustomValidators.customPasswordValidator
   });
 
   constructor(

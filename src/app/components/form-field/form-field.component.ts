@@ -9,7 +9,9 @@ import { FormGroup, FormControl, AbstractControl, ValidationErrors } from '@angu
 export class FormFieldComponent implements OnInit {
   private readonly ERROR_MESSAGE_MAP: Map<string, (field: string, errorDetails: any) => string> = new Map([
     ["required", (field: string, errorDetails: any) => `${field} is required`],
-    ["email", (field: string, errorDetails: any) => `Please enter a valid email address`]
+    ["email", (field: string, errorDetails: any) => `Please enter a valid email address`],
+    ["minlength", (field: string, errorDetails: any) => `${field} should be at least ${errorDetails.requiredLength} characters long`],
+    ["passwordDoesNotMatch", (field: string, errorDetails: any) => `Passwords does not match`]
   ]);
 
   @Input()

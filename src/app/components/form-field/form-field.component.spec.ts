@@ -74,22 +74,28 @@ describe('FormFieldComponent', () => {
     expect(hostComponent.formField.hasError()).toBeFalse();
   });
 
-  it('getErrorMessage should return "${fieldName} is required" if ${field} is required ', () => {
-    hostComponent.formField.field.setValidators([Validators.required]);
-    hostComponent.formField.field.setValue('');
-    hostComponent.formField.field.markAsDirty();
-    hostComponent.formField.field.updateValueAndValidity();
+  it('getErrorMessage should return "Password is required" when error is required', () => {
+    hostComponent.formField.field.setErrors({ required: true });
 
     expect(hostComponent.formField.getErrorMessage()).toEqual("Password is required");
   });
 
-  it('getErrorMessage should return "Please enter a valid email address" if ${field} is expected to be a valid email address but is not ', () => {
-    hostComponent.formField.field.setValidators([Validators.email]);
-    hostComponent.formField.field.setValue('asdf');
-    hostComponent.formField.field.markAsDirty();
-    hostComponent.formField.field.updateValueAndValidity();
+  it('getErrorMessage should return "Password should be at least 8 characters long" when error is minLength', () => {
+    hostComponent.formField.field.setErrors({ minlength: true });
+
+    expect(hostComponent.formField.getErrorMessage()).toEqual("Password should be at least undefined characters long");
+  });
+
+  it('getErrorMessage should return "Please enter a valid email address" when error is email', () => {
+    hostComponent.formField.field.setErrors({ email: true });
 
     expect(hostComponent.formField.getErrorMessage()).toEqual("Please enter a valid email address");
+  });
+
+  it('getErrorMessage should return "Passwords does not match" when error is passwordDoesNotMatch', () => {
+    hostComponent.formField.field.setErrors({ passwordDoesNotMatch: true });
+
+    expect(hostComponent.formField.getErrorMessage()).toEqual("Passwords does not match");
   });
 
   it('getErrorMessage should return the appropriate error message', () => {

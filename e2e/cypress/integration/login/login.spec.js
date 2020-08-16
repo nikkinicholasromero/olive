@@ -19,6 +19,32 @@ describe("Login page", () => {
         cy.get("label#emailAddressErrorMessage")
             .should("not.visible");
 
+        cy.get("input#emailAddress")
+            .clear()
+            .type("abcdefghij")
+            .should("have.class", "error");
+
+        cy.get("label#emailAddressErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "Please enter a valid email address");
+
+        cy.get("input#emailAddress")
+            .clear()
+            .should("have.class", "error");
+
+        cy.get("label#emailAddressErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "Email address is required");
+
+        cy.get("input#emailAddress")
+            .type("valid@email")
+            .should("not.have.class", "error");
+
+        cy.get("label#emailAddressErrorMessage")
+            .should("not.visible");
+
         cy.get("label[for='password']")
             .should("visible")
             .should("contain", "Password");
@@ -28,6 +54,23 @@ describe("Login page", () => {
             .should("have.attr", "type", "password")
             .should("not.have.class", "error")
             .should("value", "");
+
+        cy.get("label#passwordErrorMessage")
+            .should("not.visible");
+
+        cy.get("input#password")
+            .type("abcdefghij")
+            .clear()
+            .should("have.class", "error");
+
+        cy.get("label#passwordErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "Password is required");
+
+        cy.get("input#password")
+            .type("abcdefghij")
+            .should("not.have.class", "error");
 
         cy.get("label#passwordErrorMessage")
             .should("not.visible");

@@ -2,7 +2,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="card" data-background="color" data-color="brown">
             <div class="header">
-                <h3 class="title">Olive | Login</h3>
+                <h3 id="formTitle" class="title">Olive | Login</h3>
             </div>
             <div class="content">
                 <app-form-field [type]="'email'" [fieldName]="'Email address'" [parent]="loginForm" 
@@ -11,7 +11,7 @@
                     [field]="this.loginForm.controls['password']" ></app-form-field>
             </div>
             <div class="footer text-center">
-                <button type="submit" class="btn btn-fill btn-wd ">Login</button>
+                <button type="submit" class="btn btn-fill btn-wd">Login</button>
                 <div class="row forgot">
                     <div class="col-sm-offset-1 col-sm-5">
                         <a href="/forgotPassword" class="pull-left">Forgot password</a>

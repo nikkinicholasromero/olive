@@ -1,8 +1,8 @@
 <ng-container [formGroup]="parent">
     <div class="form-group">
-        <label>{{ fieldName }}</label>
-        <input [type]="type" [formControlName]="fieldId" [placeholder]="fieldName" class="form-control"
+        <label [for]="fieldId">{{ fieldName }}</label>
+        <input [type]="type" [id]="fieldId" [formControlName]="fieldId" [placeholder]="fieldName" class="form-control"
             [class.error]="hasError()">
-        <label *ngIf="hasError()" class="error" for="email">{{ getErrorMessage() }}</label>
+        <label *ngIf="hasError()" class="error" [id]="fieldId + 'ErrorMessage'">{{ getErrorMessage() }}</label>
     </div>
 </ng-container>

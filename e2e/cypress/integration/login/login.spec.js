@@ -79,5 +79,13 @@ describe("Login page", () => {
             .should("visible")
             .should("have.attr", "type", "submit")
             .should("contain", "Login");
+
+        cy.get("a[href='/forgotPassword']")
+            .should("visible")
+            .should("contain", "Forgot password");
+
+        cy.get("a[href='/register']")
+            .should("visible")
+            .should("contain", "Register");
     });
 });

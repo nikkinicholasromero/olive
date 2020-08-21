@@ -1,14 +1,14 @@
 <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="card" data-background="color" data-color="brown">
             <div class="header">
                 <h3 id="formTitle" class="title">Olive | Login</h3>
             </div>
             <div class="content">
-                <app-form-field [type]="'email'" [fieldName]="'Email address'" [parent]="loginForm" 
-                    [field]="this.loginForm.controls['emailAddress']"></app-form-field>
-                <app-form-field [type]="'password'" [fieldName]="'Password'" [parent]="loginForm" 
-                    [field]="this.loginForm.controls['password']" ></app-form-field>
+                <app-form-field [type]="'email'" [fieldName]="'Email address'" [form]="form" 
+                    [field]="this.form.controls['emailAddress']"></app-form-field>
+                <app-form-field [type]="'password'" [fieldName]="'Password'" [form]="form" 
+                    [field]="this.form.controls['password']" ></app-form-field>
             </div>
             <div class="footer text-center">
                 <button type="submit" class="btn btn-fill btn-wd">Login</button>

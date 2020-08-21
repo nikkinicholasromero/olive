@@ -9,7 +9,7 @@ import { CustomValidators } from '../../validators/custom-validators';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-  resetPasswordForm: FormGroup = this.formBuilder.group({
+  form: FormGroup = this.formBuilder.group({
     password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['']
   },{ 

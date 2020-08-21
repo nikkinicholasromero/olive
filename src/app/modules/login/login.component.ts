@@ -9,7 +9,7 @@ import { AuthenticationService } from '../../auth/authentication.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup = this.formBuilder.group({
+  form: FormGroup = this.formBuilder.group({
     emailAddress: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   });
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const emailAddress: string = this.loginForm.controls['emailAddress'].value;
-    const password: string = this.loginForm.controls['password'].value;
+    const emailAddress: string = this.form.controls['emailAddress'].value;
+    const password: string = this.form.controls['password'].value;
     if (this.authenticationService.authenticate(emailAddress, password)) {
       this.router.navigate(['home']);
     }

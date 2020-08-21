@@ -1,20 +1,20 @@
 <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="card" data-background="color" data-color="blue">
             <div class="header">
                 <h3 id="formTitle" class="title">Olive | Registration</h3>
             </div>
             <div class="content">
-                <app-form-field [type]="'email'" [fieldName]="'Email address'" [parent]="registrationForm" 
-                    [field]="this.registrationForm.controls['emailAddress']"></app-form-field>
-                <app-form-field [type]="'password'" [fieldName]="'Password'" [parent]="registrationForm" 
-                    [field]="this.registrationForm.controls['password']" ></app-form-field>
-                <app-form-field [type]="'password'" [fieldName]="'Confirm password'" [parent]="registrationForm" 
-                    [field]="this.registrationForm.controls['confirmPassword']" ></app-form-field>
-                <app-form-field [type]="'text'" [fieldName]="'First name'" [parent]="registrationForm" 
-                    [field]="this.registrationForm.controls['firstName']"></app-form-field>
-                <app-form-field [type]="'text'" [fieldName]="'Last name'" [parent]="registrationForm" 
-                    [field]="this.registrationForm.controls['lastName']"></app-form-field>
+                <app-form-field [type]="'email'" [fieldName]="'Email address'" [form]="form" 
+                    [field]="this.form.controls['emailAddress']"></app-form-field>
+                <app-form-field [type]="'password'" [fieldName]="'Password'" [form]="form" 
+                    [field]="this.form.controls['password']" ></app-form-field>
+                <app-form-field [type]="'password'" [fieldName]="'Confirm password'" [form]="form" 
+                    [field]="this.form.controls['confirmPassword']" ></app-form-field>
+                <app-form-field [type]="'text'" [fieldName]="'First name'" [form]="form" 
+                    [field]="this.form.controls['firstName']"></app-form-field>
+                <app-form-field [type]="'text'" [fieldName]="'Last name'" [form]="form" 
+                    [field]="this.form.controls['lastName']"></app-form-field>
             </div>
             <div class="footer text-center">
                 <button type="submit" class="btn btn-fill btn-wd">Register</button>

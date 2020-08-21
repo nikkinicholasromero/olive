@@ -7,14 +7,14 @@ describe('FormFieldComponent', () => {
   @Component({
     template: `
       <app-form-field
-       [type]="'password'" [parent]="formGroup"
-       [field]="this.formGroup.controls['password']" [fieldName]="'Password'">
+       [type]="'password'" [form]="form"
+       [field]="this.form.controls['password']" [fieldName]="'Password'">
       </app-form-field>`
   })
   class TestHostComponent {
     formField: FormFieldComponent;
 
-    public formGroup: FormGroup = new FormGroup({
+    public form: FormGroup = new FormGroup({
       emailAddress: new FormControl(['']),
       password: new FormControl([''], [Validators.required])
     });

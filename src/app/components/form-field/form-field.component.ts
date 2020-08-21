@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-form-field',
@@ -15,7 +15,7 @@ export class FormFieldComponent implements OnInit {
   ]);
 
   @Input()
-  public readonly parent: FormGroup;
+  public readonly form: FormGroup;
 
   @Input()
   public readonly fieldName: string;
@@ -31,8 +31,8 @@ export class FormFieldComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    Object.keys(this.parent.controls).forEach(key => {
-      if (this.parent.controls[key] === this.field) {
+    Object.keys(this.form.controls).forEach(key => {
+      if (this.form.controls[key] === this.field) {
         this.fieldId = key;
       }
     });

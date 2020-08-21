@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
-  forgotPasswordForm: FormGroup = this.formBuilder.group({
+  form: FormGroup = this.formBuilder.group({
     emailAddress: ['', [Validators.required, Validators.email]]
   });
 

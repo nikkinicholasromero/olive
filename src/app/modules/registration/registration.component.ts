@@ -9,7 +9,7 @@ import { CustomValidators } from 'src/app/validators/custom-validators';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  registrationForm: FormGroup = this.formBuilder.group({
+  form: FormGroup = this.formBuilder.group({
     emailAddress: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: [''],

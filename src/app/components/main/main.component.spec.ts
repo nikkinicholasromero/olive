@@ -29,7 +29,7 @@ describe('MainComponent', () => {
 
     it('should navigate to "home" if already authenticated',
         inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
-            spyOn(router, 'navigate').and.callThrough();
+            spyOn(router, 'navigate');
             spyOn(authenticationService, 'isAuthenticated').and.returnValue(true);
             component.ngOnInit();
             expect(router.navigate).toHaveBeenCalledWith(['home']);
@@ -38,7 +38,7 @@ describe('MainComponent', () => {
 
     it('should navigate to "login" if not authenticated',
         inject([AuthenticationService, Router], (authenticationService: AuthenticationService, router: Router) => {
-            spyOn(router, 'navigate').and.callThrough();
+            spyOn(router, 'navigate');
             spyOn(authenticationService, 'isAuthenticated').and.returnValue(false);
             component.ngOnInit();
             expect(router.navigate).toHaveBeenCalledWith(['login']);

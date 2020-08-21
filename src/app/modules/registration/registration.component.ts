@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { CustomValidators } from 'src/app/validators/custom-validators';
+import { CustomValidators } from '../../validators/custom-validators';
+import { FormValidationService } from '../../services/form-validation.service/form-validation.service';
 
 @Component({
   selector: 'app-registration',
@@ -20,13 +20,13 @@ export class RegistrationComponent implements OnInit {
   });
 
   constructor(
-    private router: Router,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private formValidationService: FormValidationService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    this.router.navigate(['']);
+    this.formValidationService.validateForm(this.form);
   }
 }

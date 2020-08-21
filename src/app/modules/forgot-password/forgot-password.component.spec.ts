@@ -1,10 +1,8 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password.component';
-import { routes } from '../../app-routing.module';
-import { FormFieldComponent } from 'src/app/components/form-field/form-field.component';
+import { FormFieldComponent } from '../../components/form-field/form-field.component';
+import { FormValidationService } from '../../services/form-validation.service/form-validation.service';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordComponent;
@@ -13,8 +11,8 @@ describe('ForgotPasswordComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotPasswordComponent, FormFieldComponent],
-      imports: [RouterTestingModule.withRoutes(routes), ReactiveFormsModule],
-      providers: [FormBuilder]
+      imports: [ReactiveFormsModule],
+      providers: [FormBuilder,FormValidationService]
     })
     .compileComponents();
   }));
@@ -29,11 +27,11 @@ describe('ForgotPasswordComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should navigate to root when submit is clicked',
-      inject([Router], (router: Router) => {
-          spyOn(router, 'navigate').and.callThrough();
+  it('should validate entire form when submit is clicked',
+      inject([FormValidationService], (formValidationService: FormValidationService) => {
+          spyOn(formValidationService, 'validateForm');
           component.onSubmit();
-          expect(router.navigate).toHaveBeenCalledWith(['']);
+          expect(formValidationService.validateForm).toHaveBeenCalledWith(component.form);
       })
   );
 });

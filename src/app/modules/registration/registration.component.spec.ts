@@ -1,10 +1,8 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { routes } from '../../app-routing.module';
 import { RegistrationComponent } from './registration.component';
 import { FormFieldComponent } from 'src/app/components/form-field/form-field.component';
+import { FormValidationService } from 'src/app/services/form-validation.service/form-validation.service';
 
 describe('RegistrationComponent', () => {
     let component: RegistrationComponent;
@@ -13,8 +11,8 @@ describe('RegistrationComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [RegistrationComponent,FormFieldComponent],
-            imports: [RouterTestingModule.withRoutes(routes), ReactiveFormsModule],
-            providers: [FormBuilder]
+            imports: [ReactiveFormsModule],
+            providers: [FormBuilder,FormValidationService]
         }).compileComponents();
     }));
 
@@ -28,11 +26,11 @@ describe('RegistrationComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should navigate to root when submit is clicked',
-        inject([Router], (router: Router) => {
-            spyOn(router, 'navigate').and.callThrough();
+    it('should validate entire form when submit is clicked',
+        inject([FormValidationService], (formValidationService: FormValidationService) => {
+            spyOn(formValidationService, 'validateForm');
             component.onSubmit();
-            expect(router.navigate).toHaveBeenCalledWith(['']);
+            expect(formValidationService.validateForm).toHaveBeenCalledWith(component.form);
         })
     );
 });

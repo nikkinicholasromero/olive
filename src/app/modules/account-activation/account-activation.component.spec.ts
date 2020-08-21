@@ -28,7 +28,7 @@ describe('AccountActivationComponent', () => {
 
     it('should navigate to root when submit is clicked',
         inject([Router], (router: Router) => {
-            spyOn(router, 'navigate').and.callThrough();
+            spyOn(router, 'navigate');
             component.onSubmit();
             expect(router.navigate).toHaveBeenCalledWith(['']);
         })

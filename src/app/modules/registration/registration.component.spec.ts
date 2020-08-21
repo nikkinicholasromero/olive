@@ -1,8 +1,8 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration.component';
-import { FormFieldComponent } from 'src/app/components/form-field/form-field.component';
-import { FormValidationService } from 'src/app/services/form-validation.service/form-validation.service';
+import { FormFieldComponent } from '../../components/form-field/form-field.component';
+import { FormValidationService } from '../../services/form-validation/form-validation.service';
 
 describe('RegistrationComponent', () => {
     let component: RegistrationComponent;

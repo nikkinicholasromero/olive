@@ -3,7 +3,7 @@ import { Router, RouterStateSnapshot } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { routes } from '../app-routing.module';
 import { AuthGuard } from './auth.guard';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 
 describe('AuthGuard', () => {
     let guard: AuthGuard;

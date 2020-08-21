@@ -2,11 +2,11 @@ import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing'
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../auth/authentication.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { routes } from '../../app-routing.module';
 import { LoginComponent } from './login.component';
 import { FormFieldComponent } from '../../components/form-field/form-field.component';
-import { FormValidationService } from '../../services/form-validation.service/form-validation.service';
+import { FormValidationService } from '../../services/form-validation/form-validation.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

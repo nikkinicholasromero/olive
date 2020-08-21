@@ -1,7 +1,7 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthenticationService } from 'src/app/auth/authentication.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { routes } from '../../app-routing.module';
 import { HomeComponent } from './home.component';
 

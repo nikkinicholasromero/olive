@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { routes } from '../../app-routing.module';
 import { AccountActivationComponent } from './account-activation.component';
-import { FormFieldComponent } from 'src/app/components/form-field/form-field.component';
+import { FormFieldComponent } from '../../components/form-field/form-field.component';
 
 describe('AccountActivationComponent', () => {
     let component: AccountActivationComponent;

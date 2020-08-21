@@ -88,4 +88,30 @@ describe("Login page", () => {
             .should("visible")
             .should("contain", "Register");
     });
+    
+    it("should validate form on submit", () => {
+        cy.visit("http://localhost:4200");
+
+        cy.get("button[type='submit']")
+            .should("visible")
+            .should("have.attr", "type", "submit")
+            .should("contain", "Login")
+            .click();
+
+        cy.get("input#emailAddress")
+            .should("have.class", "error");
+
+        cy.get("label#emailAddressErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "Email address is required");
+
+        cy.get("input#password")
+            .should("have.class", "error");
+
+        cy.get("label#passwordErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "Password is required");
+    });
 });

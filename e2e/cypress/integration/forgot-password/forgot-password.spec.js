@@ -50,4 +50,22 @@ describe("Forgot Password page", () => {
             .should("have.attr", "type", "submit")
             .should("contain", "Send Reset Link");
     });
+
+    it("should validate form on submit", () => {
+        cy.visit("http://localhost:4200/forgotPassword");
+
+        cy.get("button[type='submit']")
+            .should("visible")
+            .should("have.attr", "type", "submit")
+            .should("contain", "Send Reset Link")
+            .click();
+
+        cy.get("input#emailAddress")
+            .should("have.class", "error");
+
+        cy.get("label#emailAddressErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "Email address is required");
+    });
 });

@@ -68,4 +68,22 @@ describe("Reset Password page", () => {
             .should("have.attr", "type", "submit")
             .should("contain", "Reset Password");
     });
+    
+    it("should validate form on submit", () => {
+        cy.visit("http://localhost:4200/resetPassword");
+
+        cy.get("button[type='submit']")
+            .should("visible")
+            .should("have.attr", "type", "submit")
+            .should("contain", "Reset Password")
+            .click();
+
+        cy.get("input#password")
+            .should("have.class", "error");
+
+        cy.get("label#passwordErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "New password is required");
+    });
 });

@@ -161,4 +161,46 @@ describe("Registration page", () => {
             .should("have.attr", "type", "submit")
             .should("contain", "Register");
     });
+    
+    it("should validate form on submit", () => {
+        cy.visit("http://localhost:4200/register");
+
+        cy.get("button[type='submit']")
+            .should("visible")
+            .should("have.attr", "type", "submit")
+            .should("contain", "Register")
+            .click();
+
+        cy.get("input#emailAddress")
+            .should("have.class", "error");
+
+        cy.get("label#emailAddressErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "Email address is required");
+
+        cy.get("input#password")
+            .should("have.class", "error");
+
+        cy.get("label#passwordErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "Password is required");
+
+        cy.get("input#firstName")
+            .should("have.class", "error");
+
+        cy.get("label#firstNameErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "First name is required");
+
+        cy.get("input#lastName")
+            .should("have.class", "error");
+
+        cy.get("label#lastNameErrorMessage")
+            .should("visible")
+            .should("have.class", "error")
+            .should("contain", "Last name is required");
+    });
 });

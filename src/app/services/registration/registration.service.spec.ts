@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RegistrationService } from './registration.service';
 import { UserAccount } from '../../models/user-account';
 
@@ -28,10 +28,6 @@ describe('RegistrationService', () => {
         password: "somePassword",
         firstName: "someFirstName",
         lastName: "someLastname"
-      };
-      
-      const httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       };
 
       service.register(userAccount);

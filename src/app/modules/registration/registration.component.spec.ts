@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { routes } from '../../app-routing.module';
 import { RegistrationComponent } from './registration.component';
 import { FormFieldComponent } from '../../components/form-field/form-field.component';
@@ -52,6 +52,9 @@ describe('RegistrationComponent', () => {
             spyOn(registrationService, 'register');
             component.form.enable();
             component.onSubmit();
+            expect(component.loading).toBeFalse();
+            expect(component.registrationSuccessful).toBeFalse();
+            expect(component.registrationError).toBeFalse();
             expect(formValidationService.validateForm).toHaveBeenCalledWith(component.form);
             expect(registrationService.register).not.toHaveBeenCalled();
         })
@@ -63,6 +66,51 @@ describe('RegistrationComponent', () => {
             spyOn(registrationService, 'register').and.returnValue(of("someValue"));
             component.form.disable();
             component.onSubmit();
+            expect(component.loading).toBeFalse();
+            expect(component.registrationSuccessful).toBeTrue();
+            expect(component.registrationError).toBeFalse();
+            expect(formValidationService.validateForm).toHaveBeenCalledWith(component.form);
+            expect(registrationService.register).toHaveBeenCalledWith(userAccount);
+        })
+    );
+
+    it('should validate entire form when submit is clicked and call registration service if form is valid and show server error message if there is an error',
+        inject([FormValidationService, RegistrationService], (formValidationService: FormValidationService, registrationService: RegistrationService) => {
+            spyOn(formValidationService, 'validateForm');
+            spyOn(registrationService, 'register').and.callFake(() => {
+                const error: any = {
+                    status: 400,
+                    error: { errors: [{ message: "Some server error message" }] }
+                };
+                return throwError(error);
+            });
+            component.form.disable();
+            component.onSubmit();
+            expect(component.loading).toBeFalse();
+            expect(component.registrationSuccessful).toBeFalse();
+            expect(component.registrationError).toBeTrue();
+            expect(component.errorData.text).toEqual("Some server error message");
+            expect(formValidationService.validateForm).toHaveBeenCalledWith(component.form);
+            expect(registrationService.register).toHaveBeenCalledWith(userAccount);
+        })
+    );
+
+    it('should validate entire form when submit is clicked and call registration service if form is valid and show default error emssage if there is an error',
+        inject([FormValidationService, RegistrationService], (formValidationService: FormValidationService, registrationService: RegistrationService) => {
+            spyOn(formValidationService, 'validateForm');
+            spyOn(registrationService, 'register').and.callFake(() => {
+                const error: any = {
+                    status: 500,
+                    error: { errors: [{ message: "Some server error message" }] }
+                };
+                return throwError(error);
+            });
+            component.form.disable();
+            component.onSubmit();
+            expect(component.loading).toBeFalse();
+            expect(component.registrationSuccessful).toBeFalse();
+            expect(component.registrationError).toBeTrue();
+            expect(component.errorData.text).toEqual("Server is not responding right now. Please try again later.");
             expect(formValidationService.validateForm).toHaveBeenCalledWith(component.form);
             expect(registrationService.register).toHaveBeenCalledWith(userAccount);
         })
@@ -75,4 +123,12 @@ describe('RegistrationComponent', () => {
             expect(router.navigate).toHaveBeenCalledWith(['/login']);
         })
     );
+
+    it('should set registrationError to false and enable form when errorData.okCallback is called', () => {
+        component.registrationError = true;
+        component.form.disable();
+        component.errorData.okCallback();
+        expect(component.registrationError).toBeFalse();
+        expect(component.form.enabled).toBeTrue();
+    });
 });

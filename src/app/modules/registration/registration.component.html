@@ -26,4 +26,6 @@
     </form>
 </div>
 
+<app-loading-overlay *ngIf="loading"></app-loading-overlay>
 <app-success-alert *ngIf="registrationSuccessful" [successData]="successData"></app-success-alert>
+<app-error-alert *ngIf="registrationError" [errorData]="errorData"></app-error-alert>

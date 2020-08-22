@@ -1,25 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SuccessAlertComponent } from './success-alert.component';
-import { SuccessData } from './success-data';
+import { ErrorAlertComponent } from './error-alert.component';
+import { ErrorData } from './error-data';
 
-describe('SuccessAlertComponent', () => {
+describe('ErrorAlertComponent', () => {
     @Component({
-        template: `<app-success-alert [successData]="successData"></app-success-alert>`
+        template: `<app-error-alert [errorData]="errorData"></app-error-alert>`
     })
     class TestHostComponent {
-        successAlertComponent: SuccessAlertComponent;
+        errorAlertComponent: ErrorAlertComponent;
 
-        public successData: SuccessData = {
+        public errorData: ErrorData = {
             title: "Some Title",
             text: "Some Text",
             okCallback: () => { }
         };
 
-        @ViewChild(SuccessAlertComponent)
-        set setSuccessAlertComponent(successAlertComponent: SuccessAlertComponent) {
-            this.successAlertComponent = successAlertComponent;
+        @ViewChild(ErrorAlertComponent)
+        set setErrorAlertComponent(errorAlertComponent: ErrorAlertComponent) {
+            this.errorAlertComponent = errorAlertComponent;
         };
     }
 
@@ -29,7 +29,7 @@ describe('SuccessAlertComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [ReactiveFormsModule],
-            declarations: [SuccessAlertComponent, TestHostComponent]
+            declarations: [ErrorAlertComponent, TestHostComponent]
         }).compileComponents();
     }));
 
@@ -40,6 +40,6 @@ describe('SuccessAlertComponent', () => {
     });
 
     it('should create', () => {
-        expect(hostComponent.successAlertComponent).toBeTruthy();
+        expect(hostComponent.errorAlertComponent).toBeTruthy();
     });
 });

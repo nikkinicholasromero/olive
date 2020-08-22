@@ -1,0 +1,19 @@
+<div class="sweet-container">
+   <div class="sweet-overlay" tabindex="-1" style="display: block; opacity: 1;"></div>
+   <div class="sweet-alert show-sweet-alert visible"
+      style="display: block; width: 500px; padding: 20px; margin-left: -250px; background: rgb(255, 255, 255); margin-top: -189px;"
+      tabindex="-1">
+      <div class="icon success animate" style="display: block;">
+         <span class="line tip animate-success-tip"></span> <span class="line long animate-success-long"></span>
+         <div class="placeholder"></div>
+         <div class="fix"></div>
+      </div>
+      <img class="sweet-image" style="display: none;">
+      <h2>{{ successData.title }}</h2>
+      <div class="sweet-content">
+         <p>{{ successData.text }}</p>
+      </div>
+      <hr class="sweet-spacer" style="display: block;">
+      <button class="sweet-confirm btn btn-info btn-fill" (click)="successData.okCallback()">OK</button>
+   </div>
+</div>

@@ -63,7 +63,7 @@ describe('RegistrationComponent', () => {
     it('should validate entire form when submit is clicked and call registration service if form is valid',
         inject([FormValidationService, RegistrationService], (formValidationService: FormValidationService, registrationService: RegistrationService) => {
             spyOn(formValidationService, 'validateForm');
-            spyOn(registrationService, 'register').and.returnValue(of("someValue"));
+            spyOn(registrationService, 'register').and.returnValue(of(null));
             component.form.disable();
             component.onSubmit();
             expect(component.loading).toBeFalse();

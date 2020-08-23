@@ -1,4 +1,4 @@
-<div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+<div *ngIf="!loading" class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
     <form method="#" action="#">
         <div class="card" data-background="color" data-color="yellow">
             <div class="header">
@@ -10,3 +10,5 @@
         </div>
     </form>
 </div>
+
+<app-loading-overlay *ngIf="loading"></app-loading-overlay>

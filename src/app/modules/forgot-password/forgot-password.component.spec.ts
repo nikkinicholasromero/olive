@@ -1,5 +1,10 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { of, throwError } from 'rxjs';
+import { routes } from '../../app-routing.module';
 import { ForgotPasswordComponent } from './forgot-password.component';
 import { FormFieldComponent } from '../../components/form-field/form-field.component';
 import { FormValidationService } from '../../services/form-validation/form-validation.service';
@@ -11,7 +16,7 @@ describe('ForgotPasswordComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ForgotPasswordComponent, FormFieldComponent],
-      imports: [ReactiveFormsModule],
+      imports: [RouterTestingModule.withRoutes(routes), ReactiveFormsModule, HttpClientModule],
       providers: [FormBuilder,FormValidationService]
     })
     .compileComponents();

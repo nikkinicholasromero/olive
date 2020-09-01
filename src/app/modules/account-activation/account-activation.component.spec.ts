@@ -22,7 +22,7 @@ describe('AccountActivationComponent', () => {
                 useValue: {
                     queryParams: of({ "emailAddress": "someEmail@address.com", "activationCode": "someActivationCode" })
                 },
-            },]
+            }]
         }).compileComponents();
     }));
 

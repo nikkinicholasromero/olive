@@ -7,6 +7,9 @@ import { CustomValidators } from '../../validators/custom-validators/custom-vali
 import { FormValidationService } from '../../services/form-validation/form-validation.service';
 import { ForgotPasswordCodeValidation } from '../../services/forgot-password-code-validation/forgot-password-code-validation.service';
 import { ErrorData } from '../../components/alerts/error/error-data';
+import { ResetPasswordRequest } from '../../models/reset-password-request';
+import { ResetPasswordService } from '../../services/reset-password/reset-password.service';
+import { SuccessData } from '../../components/alerts/success/success-data';
 
 @Component({
   selector: 'app-reset-password',
@@ -31,19 +34,33 @@ export class ResetPasswordComponent implements OnInit {
     }
   };
 
+  emailAddress: string = "";
+  forgotPasswordCode: string = "";
+
+  resetPasswordSuccessful: boolean = false;
+
+  successData: SuccessData = {
+    title: "Reset Password Successful",
+    text: "You may now login using your new password. ",
+    okCallback: () => { 
+      this.router.navigate(['']);
+    }
+  };
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private forgotPasswordCodeValidation: ForgotPasswordCodeValidation,
     private formBuilder: FormBuilder,
     private formValidationService: FormValidationService,
-    private router: Router) { }
+    private router: Router,
+    private resetPasswordService: ResetPasswordService) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
-      const emailAddress: string = params['emailAddress'];
-      const forgotPasswordCode: string = params['forgotPasswordCode'];
+      this.emailAddress = params['emailAddress'];
+      this.forgotPasswordCode = params['forgotPasswordCode'];
 
-      this.forgotPasswordCodeValidation.validateForgotPasswordCode(emailAddress, forgotPasswordCode)
+      this.forgotPasswordCodeValidation.validateForgotPasswordCode(this.emailAddress, this.forgotPasswordCode)
         .pipe(catchError(this.handleError<any>()))
         .subscribe(() => {
           this.loading = false;
@@ -53,6 +70,25 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmit(): void {
     this.formValidationService.validateForm(this.form);
+
+    if (this.form.disabled) {
+      const resetPasswordRequest: ResetPasswordRequest = {
+          emailAddress: this.emailAddress,
+          forgotPasswordCode: this.forgotPasswordCode,
+          newPassword: this.form.controls['password'].value
+      }
+
+      this.loading = true;
+      this.resetPasswordService.resetPassword(resetPasswordRequest)
+        .pipe(catchError(this.handleError<any>()))
+        .subscribe((data) => {
+          if (data !== undefined) {
+            this.resetPasswordSuccessful = true;
+          }
+
+          this.loading = false;
+        });
+    }
   }
 
   private handleError<T>(result?: T) {

@@ -8,7 +8,7 @@ import { routes } from '../../app-routing.module';
 import { ForgotPasswordComponent } from './forgot-password.component';
 import { FormFieldComponent } from '../../components/form-field/form-field.component';
 import { FormValidationService } from '../../services/form-validation/form-validation.service';
-import { ForgotPasswordService } from 'src/app/services/forgot-password/forgot-password.service';
+import { ForgotPasswordService } from '../../services/forgot-password/forgot-password.service';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordComponent;
